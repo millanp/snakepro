@@ -1,6 +1,6 @@
 // Practice problem 'Snake' starter code
 // LATEST: added Math.randBetween function
-window.onload = function() {
+window.onload = function () {
   var canvasElem = document.getElementById("sample-canvas");
   var canvas = document.getElementById("sample-canvas").getContext("2d");
   var canvasHeight = canvasElem.height;
@@ -18,62 +18,30 @@ window.onload = function() {
       canvas.clearRect(0, 0, 300, 20) :
       canvas.clearRect(0, 0, canvasElem.width, canvasElem.height);
   }
-  canvas.sf = function() {
+  canvas.sf = function () {
     canvas.stroke();
     canvas.fill();
   }
-  canvas.f = function() {
+  canvas.f = function () {
     canvas.fill();
   }
-  canvas.s = function() {
+  canvas.s = function () {
     canvas.stroke();
   }
-  canvas.circle = function(centerX, centerY, radius) {
+  canvas.circle = function (centerX, centerY, radius) {
     canvas.beginPath();
     canvas.arc(centerX, centerY, radius, 0, 2 * Math.PI);
     canvas.closePath();
   }
 
-  Math.randBetween = function(x, y) {
+  Math.randBetween = function (x, y) {
     return Math.random() * (y - x) + x;
   }
-  Math.randIntBetween = function(x, y) {
-      return Math.floor(Math.randBetween(x, y));
-    }
-    // Helper function to display coordinates of mouse pointer.
-    // When mouse clicked, coordinates lock in until another click.
-  function hookPoints() {
-    function getCanvasCoords(evt) {
-      var rect = canvasElem.getBoundingClientRect();
-      return {
-        x: evt.clientX - rect.left,
-        y: evt.clientY - rect.top,
-      };
-    }
-    listener = function(evt) {
-      var coords = getCanvasCoords(evt);
-      coordString = "x: " + coords.x + ", y: " + coords.y;
-      render(true);
-    }
-    canvasElem.addEventListener('mousemove', listener);
-    canvasElem.onclick = function() {
-      console.log("click");
-      if (isLocked) {
-        hookPoints();
-        isLocked = false;
-      } else {
-        canvasElem.removeEventListener('mousemove', listener);
-        isLocked = true;
-      }
-    }
+  Math.randIntBetween = function (x, y) {
+    return Math.floor(Math.randBetween(x, y));
   }
-
-  function printPoints() {
-    canvas.beginPath();
-    canvas.font = "10px Arial";
-    canvas.fillStyle = "black";
-    canvas.fillText(coordString, rx(10), ry(10));
-  }
+  // Helper function to display coordinates of mouse pointer.
+  // When mouse clicked, coordinates lock in until another click.
   // Don't forget line caps!
 
 
@@ -100,7 +68,7 @@ window.onload = function() {
   }
 
   function Food(pos, color) {
-    if (typeof(pos) !== "undefined") {
+    if (typeof (pos) !== "undefined") {
       this.pos = pos;
     } else {
       var blocksFromTop = Math.randIntBetween(0, canvasHeight / blockWidth);
@@ -108,7 +76,7 @@ window.onload = function() {
       this.pos = [blocksFromLeft * blockWidth, blocksFromTop * blockWidth];
     }
 
-    this.color = color;
+    this.color = "blue";
     this.width = blockWidth;
     this.height = blockWidth;
     this.outlineWidth = outlineWidth;
@@ -118,7 +86,7 @@ window.onload = function() {
       canvas.fillStyle = this.color;
       canvas.lineWidth = this.outlineWidth;
       canvas.beginPath()
-        // All of these outlineWidth/2 things are to make blocks never overlap
+      // All of these outlineWidth/2 things are to make blocks never overlap
       canvas.rect(this.pos[0], this.pos[1], this.width - this.outlineWidth / 2, this.height - this.outlineWidth / 2);
       canvas.sf();
     }
@@ -133,11 +101,11 @@ window.onload = function() {
     this.prevBrick = prevBrick;
     this.outlineWidth = outlineWidth;
 
-    this.sf = function() {
+    this.sf = function () {
       canvas.fillStyle = this.color;
       canvas.lineWidth = this.outlineWidth;
       canvas.beginPath()
-        // All of these outlineWidth/2 things are to make blocks never overlap
+      // All of these outlineWidth/2 things are to make blocks never overlap
       canvas.rect(this.pos[0], this.pos[1], this.width - this.outlineWidth / 2, this.height - this.outlineWidth / 2);
       canvas.sf();
     }
@@ -145,12 +113,10 @@ window.onload = function() {
     // This function:
     // 1. Scoots all following bricks along by one "place", by editing their pos properties
     // 2. Calls sf on all following bricks
-    this.isAtDeath = function() {
+    this.isAtDeath = function () {
       if (occupiedSpaces.has(JSON.stringify(this.pos))) {
-        occupiedSpaces.forEach(function(a, b, c) {
-          console.log(a);
+        occupiedSpaces.forEach(function (a, b, c) {
         });
-        console.log("has");
         return true;
       }
       if (this.pos[0] < 0 || this.pos[1] < 0) {
@@ -162,7 +128,7 @@ window.onload = function() {
       return false;
     }
 
-    this.sfsnake = function() {
+    this.sfsnake = function () {
       // IF snake is at required length, begin shifting at this.
       // OTHERWISE, begin shifting at nextBrick
       var currBrick;
@@ -230,7 +196,7 @@ window.onload = function() {
       return false;
     }
   }
-  window.addEventListener('keydown', function(e) {
+  window.addEventListener('keydown', function (e) {
     var oldDir = dirQueue[0];
     if (!oldDir) {
       oldDir = dir;
@@ -299,8 +265,8 @@ window.onload = function() {
     canvas.beginPath();
     canvas.fillStyle = "black";
     canvas.font = "18px Arial";
-    typeof(text) == "string" ?
-    canvas.fillText(text, rx(10), ry(20)):
+    typeof (text) == "string" ?
+      canvas.fillText(text, rx(10), ry(20)) :
       canvas.fillText("Person by Millan", rx(25), ry(254));
   }
 
