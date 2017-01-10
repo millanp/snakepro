@@ -12,6 +12,7 @@
   <script>
       // Practice problem 'Snake' starter code
     // LATEST: added Math.randBetween function
+    window.onload = function() {
     var canvasElem = document.getElementById("sample-canvas");
     var canvas = document.getElementById("sample-canvas").getContext("2d");
     var canvasHeight = canvasElem.height;
@@ -339,6 +340,7 @@
     }
     function ry(y) {
       return y - itemPosition[1];
+    }
     }
   </script>
 </head>
