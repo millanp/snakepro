@@ -201,24 +201,24 @@ window.onload = function () {
     if (!oldDir) {
       oldDir = dir;
     }
-    switch (String.fromCharCode(e.keyCode)) {
-      case 'W':
+    switch (e.keyCode) {
+      case 38:
         if (oldDir != 2 && oldDir != 4) {
 
           dirQueue.unshift(4);
         }
         break;
-      case 'D':
+      case 39:
         if (oldDir != 3 && oldDir != 1) {
           dirQueue.unshift(1);
         }
         break;
-      case 'S':
+      case 40:
         if (oldDir != 4 && oldDir != 2) {
           dirQueue.unshift(2);
         }
         break;
-      case 'A':
+      case 37:
         if (oldDir != 1 && oldDir != 3) {
           dirQueue.unshift(3);
 
