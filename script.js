@@ -197,6 +197,7 @@ window.onload = function () {
     }
   }
   window.addEventListener('keydown', function (e) {
+    e.preventDefault();
     var oldDir = dirQueue[0];
     if (!oldDir) {
       oldDir = dir;
